@@ -129,8 +129,11 @@ body {
   background-color: rgba(35,31,32,0.8);
 }
 
+table {
+  margin-top: 30%;
+}
+
 .addTrain {
-  margin-top: 70%;
 }
 
 .card {
@@ -168,7 +171,7 @@ body {
     font-size: 20px;
   }
   .addTrain {
-    bottom: -400px;
+
   }
 
 
@@ -182,7 +185,7 @@ body {
     margin-bottom: 800px;
   }
   .addTrain {
-  margin-top: 90%;
+
 
   }
 
@@ -196,7 +199,7 @@ body {
     margin-bottom: 1300px;
   }
   .addTrain {
-    margin-top: 80%;
+
   }
 
 }
