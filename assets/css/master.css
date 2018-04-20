@@ -82,6 +82,16 @@
 }
 
 /*rest of page*/
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin-bottom: 180px;
+}
 #footer {
   font-family: 'Raleway', Arial, sans-serif;
   bottom: -180px;
@@ -92,4 +102,19 @@
   background-color: rgb(52,58,64);
   padding: 3% 0% 3% 0%;
   background-color: black;
+}
+
+@media (max-width: 480px) {
+  #footer {
+    bottom: -525px;
+  }
+
+
+}
+
+@media (min-width: 768px) {
+  #footer {
+    bottom: -200px;
+  }
+
 }
