@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--stylesheets-->
+  <!--stylesheets-->
   <link rel="stylesheet" href="assets/css/reset.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,28 +13,54 @@
   <!-- Firebase Reference -->
   <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
   <!-- Moment.js-->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/af.js"></script>
-  <title>Firebase-Train Schedule Database</title>
+  <scriptsrc="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/af.js">
+    </script>
+    <title>Firebase-Train Schedule Database</title>
 </head>
+
 <body>
   <!--logo-->
-  <div class="logo">
-    <div class="diamond"></div>
-    <div class="diamond"></div>
-    <div class="diamond"></div>
-    <h1>Firebase Railways</h1>
-    <p>Arrivals & Departures</p>
-    <h6>Est. 2018</h6>
+  <div class="wrapper">
+    <div class="logo container-fluid">
+      <div class="diamond"></div>
+      <div class="diamond"></div>
+      <div class="diamond"></div>
+      <h1>Firebase Railways</h1>
+      <p>Arrivals & Departures</p>
+      <h6>Est. 2018</h6>
+    </div>
   </div>
-<!--message scramble-->
- <div id="messenger"></div>
+  <!--message scramble-->
+  <div id="messenger"></div>
+  <!--show trains added-->
 
-
-
-
-
-
-
+  <!--add train-->
+  <div class="container addTrain">
+    <div class="card border-dark">
+      <h5 class="card-header">Schedule A New Train</h5>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Train Name</label>
+            <input type="text" class="form-control" id="trainName" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Destination</label>
+            <input type="text" class="form-control" id="destination" placeholder="Location">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">First Train Departure Time</label>
+            <input type="text" class="form-control" id="departureTime" placeholder="00:00">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Departure Frequency (In Minutes)</label>
+            <input type="text" class="form-control" id="departureFreq" placeholder="Minutes">
+          </div>
+        </form>
+        <a href="#" class="btn" id="submitTrain">Add Train</a>
+      </div>
+    </div>
+  </div>
 
   <!--footer-->
   <section id="footer">
@@ -49,17 +76,17 @@
             <li><a class="links" href="javascript:void();"><i class="fa fa-angle-double-right links"></i>Music Inquires</a></li>
           </ul>
         </div>
-          <div class="col-xs-12 col-sm-12 col-md-6 mt-2 mt-sm-5">
-            <ul class="list-unstyled list-inline text-center">
-              <p>Connect With Me:</p>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/facebook.png" /></a></li>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/twitter.png" /></a></li>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/linkedin.png" /></a></li>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/plus.png" /></a></li>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/github.png" /></a></li>
-              <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/instagram.png" /></a></li>
-            </ul>
-          </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 mt-2 mt-sm-5">
+          <ul class="list-unstyled list-inline text-center">
+            <p>Connect With Me:</p>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/facebook.png" /></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/twitter.png" /></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/linkedin.png" /></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/plus.png" /></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/github.png" /></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><img width="50px" src="assets/images/instagram.png" /></a></li>
+          </ul>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-3 text-md-right text-sm-center text-xs-center">
           <h5>Other Projects</h5>
           <ul class="list-unstyled quick-links">
@@ -75,13 +102,14 @@
     <p class="h6 copy">&copyBenMercerCodes</p>
   </section>
   <!--scripts-->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!--backstretch-->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
-	<script type="text/javascript" src="assets/javascript/logic.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
+  <script type="text/javascript" src="assets/javascript/logic.js"></script>
 </body>
+
 </html>

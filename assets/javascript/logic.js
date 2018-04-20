@@ -91,7 +91,7 @@ $("body").backstretch("assets/images/train5.jpeg");
   m.init();
 }
 
-console.clear();
+//console.clear();
 var messenger = new Messenger($('#messenger'));
 
 //initialize firebase
