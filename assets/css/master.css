@@ -122,6 +122,8 @@ html {
 
 body {
   margin-bottom: 300px;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .wrapper {
@@ -131,6 +133,7 @@ body {
 
 table {
   margin-top: 30%;
+
 }
 
 .addTrain {
