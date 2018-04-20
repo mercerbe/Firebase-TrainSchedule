@@ -91,6 +91,19 @@
   transform: rotateZ(-45deg) scale(2) translate(2px, -2px);
 }
 
+/*scramble*/
+#messenger {
+  position: absolute;
+  top: 29%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: monospace;
+  font-size: 35px;
+  white-space: nowrap;
+  text-shadow: 0 2px 2px rgba(35,31,32,0.9);
+  color: yellow;
+}
+
 /*rest of page*/
 body,
 html {
@@ -116,10 +129,13 @@ body {
 
 @media (max-width: 480px) {
   #footer {
-    bottom: -525px;
+    bottom: -600px;
   }
   .logo {
     font-size: 16px;
+  }
+  #messenger {
+    font-size: 20px;
   }
 
 
