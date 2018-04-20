@@ -1,0 +1,95 @@
+/*Logo*/
+@import url(https://fonts.googleapis.com/css?family=Raleway:800);
+@import url(https://fonts.googleapis.com/css?family=Monsterat:700);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+.snip1290 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  color: #bdbdbd;
+  margin: 80px 40px 80px;
+  max-width: 295px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.snip1290 h1,
+.snip1290 h5 {
+  margin: 0;
+  text-transform: uppercase;
+}
+.snip1290 h1 {
+  font-family: 'Monsterat', Arial, sans-serif;
+  font-size: 2.6em;
+  line-height: 1em;
+  position: relative;
+  font-weight: 900;
+  margin-bottom: 7px;
+  padding-bottom: 12px;
+}
+.snip1290 h1:before,
+.snip1290 h1:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+}
+.snip1290 h1:before {
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: solid #bdbdbd;
+  border-width: 8px;
+  bottom: 100%;
+}
+.snip1290 h1:after {
+  width: 230px;
+  height: 8px;
+  background-color: #bdbdbd;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: 0;
+}
+.snip1290 h5 {
+  font-size: 0.7em;
+  font-weight: 800;
+  width: 200px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+}
+.snip1290 h5:after {
+  position: absolute;
+  content: '';
+  width: 210px;
+  height: 8px;
+  background-color: #bdbdbd;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: 0;
+}
+.snip1290 i {
+  font-size: 2.8em;
+  line-height: 1em;
+}
+.snip1290 i:nth-of-type(2) {
+  font-size: 5em;
+}
+
+/*rest of page*/
+#footer {
+  font-family: 'Raleway', Arial, sans-serif;
+  bottom: -180px;
+  color: rgb(244,243,243);
+  width:100%;
+  position: absolute;
+  text-align: center;
+  background-color: rgb(52,58,64);
+  padding: 3% 0% 3% 0%;
+  background-color: black;
+}
