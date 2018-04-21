@@ -110,8 +110,6 @@ var database = firebase.database();
 //var currentTime = moment().format('LTS');
 var currentTime = moment();
 console.log(currentTime);
-var nextArrival = "";
-var minUntilArrival = "";
 //database ref
 database.ref().on("child_added", function(childSnap) {
   //variables
@@ -135,27 +133,26 @@ $("#submitTrain").on("click", function() {
   var trainName = $("#trainName").val().trim();
   var destinationInput = $("#destination").val().trim();
   var departureTime = $("#departureTime").val().trim();
-  var departureFreq = $("#departureFreq").val().trim();
+  var frequency = $("#departureFreq").val().trim();
   //check that all inputs are filled
   if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
     alert("no");
     return false;
   }
   //math for Train Info:
-  //subtract 1 year from 1st train
-  var departureTimeConverted = moment(departureTime, "hh:mm").subtract("1, years");
+  var departureTimeConverted = moment(departureTime, "hh:mm a");
   //time difference btwn current time and 'firstTrain'
   var timeDifference = currentTime.diff(moment(departureTimeConverted), "minutes");
-  var remainder = timeDifference % departureFreq;
-  var minUntilArrival = departureFreq - remainder;
-  var nextTrain = moment().add(minUntilArrival, "minutes").format("hh:mm");
+  var remainder = timeDifference % frequency;
+  var minUntilArrival = frequency - remainder;
+  var nextTrain = moment().add(minUntilArrival, "minutes").format("hh:mm a");
 
   //new train object
   var newTrain = {
     name : trainName,
     destination : destinationInput,
     firstTrain : departureTime,
-    frequency : departureFreq,
+    frequency : frequency,
     min : minUntilArrival,
     next : nextTrain,
   }
