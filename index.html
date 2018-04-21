@@ -13,8 +13,7 @@
   <!-- Firebase Reference -->
   <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
   <!-- Moment.js-->
-  <scriptsrc="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/af.js">
-    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     <title>Firebase-Train Schedule Database</title>
 </head>
 
@@ -34,8 +33,9 @@
   <!--message scramble-->
   <div id="messenger"></div>
   <!--show trains added-->
+  <div class="container">
   <div class="table-responsive">
-  <table class="table table-striped table-dark">
+  <table class="table table-striped table-dark trainTable">
   <thead>
     <tr>
       <th scope="col">Train</th>
@@ -46,16 +46,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
+
   </tbody>
 </table>
   </div>
+    </div>
+<!--modal-->
+<div id="dialog" title="Warning">
+  <p></p>
+</div>
 
   <!--add train-->
   <div class="container addTrain">
@@ -73,11 +72,11 @@
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">First Train Departure Time</label>
-            <input type="text" class="form-control" id="departureTime" placeholder="00:00">
+            <input type="time" class="form-control" id="departureTime" placeholder="00:00">
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Departure Frequency (In Minutes)</label>
-            <input type="text" class="form-control" id="departureFreq" placeholder="Minutes">
+            <input type="number" class="form-control" id="departureFreq" placeholder="Minutes">
           </div>
         </form>
         <a href="#" class="btn" id="submitTrain">Add Train</a>

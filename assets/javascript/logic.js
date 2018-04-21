@@ -71,7 +71,7 @@ $("body").backstretch("assets/images/train5.jpeg");
     if(do_cycles === true){
       setTimeout(m.animateFadeBuffer, 50);
     } else {
-      setTimeout(m.cycleText, 2000);
+      setTimeout(m.cycleText, 5000);
     }
   };
 
@@ -104,3 +104,65 @@ var config = {
   messagingSenderId: "370451683022"
 };
 firebase.initializeApp(config);
+
+//starting variables
+var database = firebase.database();
+var currentTime = moment().format();
+
+//database ref
+database.ref().on("child_added", function(childSnap) {
+  //variables
+  var name = childSnap.val().name;
+  var destination = childSnap.val().destination;
+  var firstTrain = childSnap.val().firstTrain;
+  var frequency = childSnap.val().min;
+  var nextTrain = childSnap.val().nextTrain;
+  //create new rows of data
+  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td></tr>" + "<tr><td>" + destination + "</td></tr>" + "<tr><td>" + firstTrain + "</td></tr>" + "<tr><td>" + min + "</td></tr>" + "<tr><td>" + nextTrain + "</td></tr>");
+});
+
+database.ref().on("value", function(snapshot) {
+
+});
+
+//grab input values on submit
+$("#submitTrain").on("click", function() {
+  //make variables
+  var trainName = $("#trainName").val().trim();
+  var destinationInput = $("#destination").val().trim();
+  var departureTime = $("#departureTime").val().trim();
+  var departureFreq = $("#departureFreq").val().trim();
+  //check that all inputs are filled
+  if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
+    alert("no");
+    return false;
+  }
+  //math for Train Info:
+  //subtract 1 year from 1st train
+  var departureTimeConverted = moment(firstTrain, "hh:mm").subtract("1, years");
+  //time difference btwn current time and 'firstTrain'
+  var timeDifference = currentTime.diff(moment(departureTimeConverted), "minutes");
+  var remainder = timeDifference % frequency;
+  var minUntilArrival = frequency - remainder;
+  var nextArrival = moment().add(minUntilArrival, "minutes").format("hh:mm");
+
+  //new train object
+  var newTrain = {
+    name : trainName,
+    destination : destinationInput,
+    firstTrain : departureTime,
+    frequency : frequency,
+    min : minUntilArrival,
+    next : nextArrival,
+  }
+console.log(newTrain);
+database.ref().push(newTrain);
+
+//clear inputs
+$("#trainName").val("");
+$("#destination").val("");
+$("#departureTime").val("");
+$("#departureFreq").val("");
+
+//return false;
+});
