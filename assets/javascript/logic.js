@@ -107,7 +107,7 @@ firebase.initializeApp(config);
 
 //starting variables
 var database = firebase.database();
-var currentTime = moment().format();
+var currentTime = moment();
 
 //database ref
 database.ref().on("child_added", function(childSnap) {
@@ -115,10 +115,10 @@ database.ref().on("child_added", function(childSnap) {
   var name = childSnap.val().name;
   var destination = childSnap.val().destination;
   var firstTrain = childSnap.val().firstTrain;
-  var frequency = childSnap.val().min;
+  var frequency = childSnap.val().frequency;
   var nextTrain = childSnap.val().nextTrain;
   //create new rows of data
-  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td></tr>" + "<tr><td>" + destination + "</td></tr>" + "<tr><td>" + firstTrain + "</td></tr>" + "<tr><td>" + min + "</td></tr>" + "<tr><td>" + nextTrain + "</td></tr>");
+  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td></tr>" + "<tr><td>" + destination + "</td></tr>" + "<tr><td>" + firstTrain + "</td></tr>" + "<tr><td>" + frequency + "</td></tr>" + "<tr><td>" + nextTrain + "</td></tr>");
 });
 
 database.ref().on("value", function(snapshot) {
@@ -133,17 +133,17 @@ $("#submitTrain").on("click", function() {
   var departureTime = $("#departureTime").val().trim();
   var departureFreq = $("#departureFreq").val().trim();
   //check that all inputs are filled
-  if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
-    alert("no");
-    return false;
-  }
+  //if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
+  //  alert("no");
+  //  return false;
+//  }
   //math for Train Info:
   //subtract 1 year from 1st train
-  var departureTimeConverted = moment(firstTrain, "hh:mm").subtract("1, years");
+  var departureTimeConverted = moment(departureTime, "hh:mm").subtract("1, years");
   //time difference btwn current time and 'firstTrain'
   var timeDifference = currentTime.diff(moment(departureTimeConverted), "minutes");
-  var remainder = timeDifference % frequency;
-  var minUntilArrival = frequency - remainder;
+  var remainder = timeDifference % departureFreq;
+  var minUntilArrival = departureFreq - remainder;
   var nextArrival = moment().add(minUntilArrival, "minutes").format("hh:mm");
 
   //new train object
@@ -151,7 +151,7 @@ $("#submitTrain").on("click", function() {
     name : trainName,
     destination : destinationInput,
     firstTrain : departureTime,
-    frequency : frequency,
+    frequency : departureFreq,
     min : minUntilArrival,
     next : nextArrival,
   }
