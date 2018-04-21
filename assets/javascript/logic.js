@@ -118,7 +118,7 @@ database.ref().on("child_added", function(childSnap) {
   var frequency = childSnap.val().frequency;
   var nextTrain = childSnap.val().nextTrain;
   //create new rows of data
-  $("#trainTable > tbody").append("<tr><td>" + trainName + "</td></tr>" + "<tr><td>" + destination + "</td></tr>" + "<tr><td>" + firstTrain + "</td></tr>" + "<tr><td>" + frequency + "</td></tr>" + "<tr><td>" + nextTrain + "</td></tr>");
+  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + firstTrain + "</td>" + "<td>" + frequency + "</td>" + "<td>" + nextTrain + "</td></tr>");
 });
 
 database.ref().on("value", function(snapshot) {
