@@ -133,10 +133,10 @@ $("#submitTrain").on("click", function() {
   var departureTime = $("#departureTime").val().trim();
   var departureFreq = $("#departureFreq").val().trim();
   //check that all inputs are filled
-  //if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
-  //  alert("no");
-  //  return false;
-//  }
+  if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
+    alert("no");
+    return false;
+  }
   //math for Train Info:
   //subtract 1 year from 1st train
   var departureTimeConverted = moment(departureTime, "hh:mm").subtract("1, years");
