@@ -107,8 +107,11 @@ firebase.initializeApp(config);
 
 //starting variables
 var database = firebase.database();
+//var currentTime = moment().format('LTS');
 var currentTime = moment();
-
+console.log(currentTime);
+var nextArrival = "";
+var minUntilArrival = "";
 //database ref
 database.ref().on("child_added", function(childSnap) {
   //variables
@@ -116,10 +119,10 @@ database.ref().on("child_added", function(childSnap) {
   var destination = childSnap.val().destination;
   var firstTrain = childSnap.val().firstTrain;
   var frequency = childSnap.val().frequency;
-  var nextTrain = childSnap.val().nextTrain;
-  var minUntilArrival = childSnap.val().minUntilArrival;
+  var next = childSnap.val().next;
+  var min = childSnap.val().min;
   //create new rows of data
-  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + nextTrain + "</td>" + "<td>" + minUntilArrival + "</td></tr>");
+  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td></tr>");
 });
 
 database.ref().on("value", function(snapshot) {
@@ -145,7 +148,7 @@ $("#submitTrain").on("click", function() {
   var timeDifference = currentTime.diff(moment(departureTimeConverted), "minutes");
   var remainder = timeDifference % departureFreq;
   var minUntilArrival = departureFreq - remainder;
-  var nextArrival = moment().add(minUntilArrival, "minutes").format("hh:mm");
+  var nextTrain = moment().add(minUntilArrival, "minutes").format("hh:mm");
 
   //new train object
   var newTrain = {
@@ -154,7 +157,7 @@ $("#submitTrain").on("click", function() {
     firstTrain : departureTime,
     frequency : departureFreq,
     min : minUntilArrival,
-    next : nextArrival,
+    next : nextTrain,
   }
 console.log(newTrain);
 database.ref().push(newTrain);
