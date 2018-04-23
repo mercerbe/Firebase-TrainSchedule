@@ -90,9 +90,9 @@ $("body").backstretch("assets/images/train5.jpeg");
 
   m.init();
 }
-
-//console.clear();
 var messenger = new Messenger($('#messenger'));
+
+
 
 //initialize firebase
 var config = {
@@ -107,9 +107,6 @@ firebase.initializeApp(config);
 
 //starting variables
 var database = firebase.database();
-//var currentTime = moment().format('LTS');
-var currentTime = moment();
-console.log(currentTime);
 //database ref
 database.ref().on("child_added", function(childSnap) {
   //variables
@@ -123,10 +120,6 @@ database.ref().on("child_added", function(childSnap) {
   $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td></tr>");
 });
 
-database.ref().on("value", function(snapshot) {
-
-});
-
 //grab input values on submit
 $("#submitTrain").on("click", function() {
   //make variables
@@ -136,15 +129,26 @@ $("#submitTrain").on("click", function() {
   var frequency = $("#departureFreq").val().trim();
   //check that all inputs are filled
   if (trainName == "" || destinationInput == "" || departureTime == "" || departureFreq == "") {
-    alert("no");
+    alert("Please Fill Out The Entire Form!");
     return false;
   }
   //math for Train Info:
-  var departureTimeConverted = moment(departureTime, "hh:mm a");
+  //first Train
+  var departureTimeConverted = moment(departureTime, "hh:mm:ss a").subtract(1, "years");
+  console.log("first train time: " + departureTimeConverted);
+  //current Time
+  var currentTime = moment();
+  console.log("current time: " + moment(currentTime).format("hh:mm:ss"));
   //time difference btwn current time and 'firstTrain'
-  var timeDifference = currentTime.diff(moment(departureTimeConverted), "minutes");
+  var timeDifference = moment().diff(moment(departureTimeConverted), "minutes");
+  console.log("time difference: " + timeDifference);
+  //time remaining
   var remainder = timeDifference % frequency;
+  console.log(remainder);
+  //min until next arrival
   var minUntilArrival = frequency - remainder;
+  console.log("minutes till next arrival: " + minUntilArrival);
+  //next train time
   var nextTrain = moment().add(minUntilArrival, "minutes").format("hh:mm a");
 
   //new train object
@@ -165,5 +169,4 @@ $("#destination").val("");
 $("#departureTime").val("");
 $("#departureFreq").val("");
 
-//return false;
 });
