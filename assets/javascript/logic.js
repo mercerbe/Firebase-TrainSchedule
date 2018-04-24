@@ -104,6 +104,9 @@ var config = {
   messagingSenderId: "370451683022"
 };
 firebase.initializeApp(config);
+//signIn
+
+
 
 //starting variables
 var database = firebase.database();
