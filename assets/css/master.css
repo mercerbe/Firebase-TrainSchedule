@@ -126,6 +126,10 @@ body {
   min-height: 100%;
 }
 
+.btnRow {
+  margin-top: 5px;
+}
+
 #btnLogout {
   diplay: block;
   color: yellow;

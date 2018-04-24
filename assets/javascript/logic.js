@@ -135,7 +135,8 @@ btnSignup.addEventListener('click', e => {
   var auth = firebase.auth();
   //sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass);
-  promise.then(value => {$("#submitTrain").prop('disabled', false);})
+  promise.then(value => {$("#submitTrain").prop('disabled', false);});
+  promise.then(value => {$("#btnEdit").prop('disabled', false);})
   promise.catch(e => console.log(e.message));
 })
 
@@ -145,6 +146,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log(firebaseUser);
     $("#modal").modal('hide');
     $("#submitTrain").prop('disabled', false);
+    $("#btnEdit").prop('disabled', false);
   } else {
     console.log("not logged in");
     $("#modal").modal('show');
@@ -157,6 +159,7 @@ btnLogout.addEventListener('click', e => {
   $("#modal").modal('show');
 }, 1000);
   $("#submitTrain").prop('disabled', true);
+  $("#btnEdit").prop('disabled', true);
 
 })
 //show modal
@@ -181,7 +184,7 @@ database.ref().on("child_added", function(childSnap) {
   var timeRef = childSnap.val().time;
 
   //create new rows of data
-  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td></tr>");
+  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td>" + "<td>" + '<button class="btn btn-danger btnEdit">Edit/Clear</button>' + "</td></tr>");
 });
 
 
