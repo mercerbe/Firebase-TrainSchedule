@@ -1,3 +1,4 @@
+$(document).ready(function() {
 //background
 $("body").backstretch("assets/images/train5.jpeg");
 
@@ -105,9 +106,53 @@ var config = {
 };
 firebase.initializeApp(config);
 //signIn
+var txtEmail = document.getElementById('txtEmail');
+var txtPass = document.getElementById('txtPass');
+var btnLogin = document.getElementById('btnLogin');
+var btnSignup = document.getElementById('btnSignup');
+var btnLogout = document.getElementById('btnLogout');
 
+//login
+btnLogin.addEventListener('click', e => {
+  //get email and pass
+  var email = txtEmail.value;
+  var pass = txtPass.value;
+  var auth = firebase.auth();
+  //sign in
+  var promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch(e => console.log(e.message));
+  promise.catch(e => alert("Not signed up. Please sign up first!"));
 
+})
 
+//sign up
+btnSignup.addEventListener('click', e => {
+  var email = txtEmail.value;
+  var pass = txtPass.value;
+  var auth = firebase.auth();
+  //sign in
+  var promise = auth.createUserWithEmailAndPassword(email, pass);
+  promise
+    .catch(e => console.log(e.message));
+})
+
+//real time auth listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if(firebaseUser) {
+    console.log(firebaseUser);
+    $("#modal").modal('hide');
+  } else {
+    console.log("not logged in");
+  }
+})
+//logout
+btnLogout.addEventListener('click', e => {
+  firebase.auth().signOut();
+  setTimeout(function(){
+  $("#modal").modal('show');
+}, 1000);
+
+})
 //starting variables
 var database = firebase.database();
 var time = moment().format();
@@ -179,13 +224,8 @@ $("#departureFreq").val("");
 
 });
 
-$(document).ready(function() {
-  var dbRef = database.ref('data');
-  dbRef.on('value', snapshot => {
-    console.log(snapshot.val());
-  })
-  //background
-  $("body").backstretch("assets/images/train5.jpeg");
   //modal
+  setTimeout(function(){
   $("#modal").modal('show');
+}, 1000);
 });

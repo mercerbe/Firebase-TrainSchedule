@@ -126,6 +126,11 @@ body {
   min-height: 100%;
 }
 
+#btnLogout {
+  diplay: block;
+  color: yellow;
+}
+
 #modalImg {
   max-width: 200px;
   display: block;
