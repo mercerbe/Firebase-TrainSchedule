@@ -185,7 +185,7 @@ database.ref().on("child_added", function(childSnap) {
   var timeRef = childSnap.val().time;
 
   //create new rows of data
-  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td>" + "<td>" + '<button class="btn btn-danger btnEdit">Edit/Clear</button>' + "</td></tr>");
+  $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td>" + "<td>" + '<div class="btn-group"><button class="btn btn-warning btnEdit">Edit</button><button class="btn btn-danger btnRemove">Remove</button></div>' + "</td></tr>");
 });
 
 

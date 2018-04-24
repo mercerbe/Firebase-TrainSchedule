@@ -135,6 +135,14 @@ body {
   color: yellow;
 }
 
+.btnEdit {
+  color: white;
+}
+
+.btnRemove:hover {
+  color: black;
+}
+
 #btnShowModal {
   display: block;
   color: yellow;
