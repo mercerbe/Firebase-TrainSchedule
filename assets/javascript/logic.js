@@ -1,6 +1,7 @@
 $(document).ready(function() {
 //form disable until sign in
 $("#submitTrain").prop('disabled', true);
+$(".btnEdit").prop('disabled', true);
 //background
 $("body").backstretch("assets/images/train5.jpeg");
 
@@ -113,7 +114,6 @@ var txtPass = document.getElementById('txtPass');
 var btnLogin = document.getElementById('btnLogin');
 var btnSignup = document.getElementById('btnSignup');
 var btnLogout = document.getElementById('btnLogout');
-var btnClose = document.getElementById('btnClose');
 
 //login
 btnLogin.addEventListener('click', e => {
@@ -136,7 +136,7 @@ btnSignup.addEventListener('click', e => {
   //sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.then(value => {$("#submitTrain").prop('disabled', false);});
-  promise.then(value => {$("#btnEdit").prop('disabled', false);})
+  promise.then(value => {$(".btnEdit").prop('disabled', false);})
   promise.catch(e => console.log(e.message));
 })
 
@@ -146,10 +146,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log(firebaseUser);
     $("#modal").modal('hide');
     $("#submitTrain").prop('disabled', false);
-    $("#btnEdit").prop('disabled', false);
+    $(".btnEdit").prop('disabled', false);
   } else {
     console.log("not logged in");
     $("#modal").modal('show');
+    $(".btnEdit").prop('disabled', true);
   }
 })
 //logout
@@ -159,7 +160,7 @@ btnLogout.addEventListener('click', e => {
   $("#modal").modal('show');
 }, 1000);
   $("#submitTrain").prop('disabled', true);
-  $("#btnEdit").prop('disabled', true);
+  $(".btnEdit").prop('disabled', true);
 
 })
 //show modal
