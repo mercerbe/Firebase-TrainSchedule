@@ -107,6 +107,7 @@ firebase.initializeApp(config);
 
 //starting variables
 var database = firebase.database();
+var time = moment().format();
 //database ref
 database.ref().on("child_added", function(childSnap) {
   //variables
@@ -116,9 +117,12 @@ database.ref().on("child_added", function(childSnap) {
   var frequency = childSnap.val().frequency;
   var next = childSnap.val().next;
   var min = childSnap.val().min;
+  var timeRef = childSnap.val().time;
+
   //create new rows of data
   $("tbody").append("<tr><td>" + name + "</td>" + "<td>" + destination + "</td>" + "<td>" + frequency + "</td>" + "<td>" + next + "</td>" + "<td>" + min + "</td></tr>");
 });
+
 
 //grab input values on submit
 $("#submitTrain").on("click", function() {
@@ -134,11 +138,11 @@ $("#submitTrain").on("click", function() {
   }
   //math for Train Info:
   //first Train
-  var departureTimeConverted = moment(departureTime, "hh:mm:ss a").subtract(1, "years");
+  var departureTimeConverted = moment(departureTime, "hh:mm a").subtract(1, "years");
   console.log("first train time: " + departureTimeConverted);
   //current Time
-  var currentTime = moment();
-  console.log("current time: " + moment(currentTime).format("hh:mm:ss"));
+  var currentTime = moment().format("hh:mm a");
+  console.log("current time: " + moment(currentTime).format("hh:mm a"));
   //time difference btwn current time and 'firstTrain'
   var timeDifference = moment().diff(moment(departureTimeConverted), "minutes");
   console.log("time difference: " + timeDifference);
@@ -159,6 +163,7 @@ $("#submitTrain").on("click", function() {
     frequency : frequency,
     min : minUntilArrival,
     next : nextTrain,
+    time : currentTime,
   }
 console.log(newTrain);
 database.ref().push(newTrain);
@@ -169,4 +174,15 @@ $("#destination").val("");
 $("#departureTime").val("");
 $("#departureFreq").val("");
 
+});
+
+$(document).ready(function() {
+  var dbRef = database.ref('data');
+  dbRef.on('value', snapshot => {
+    console.log(snapshot.val());
+  })
+  //background
+  $("body").backstretch("assets/images/train5.jpeg");
+  //modal
+  $("#modal").modal('show');
 });
