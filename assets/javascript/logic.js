@@ -1,7 +1,7 @@
 $(document).ready(function() {
 //form disable until sign in
-$("#submitTrain").prop('disabled', true);
-$(".btnEdit").prop('disabled', true);
+// $("#submitTrain").prop('disabled', true);
+// $(".btnEdit").prop('disabled', true);
 //background
 $("body").backstretch("assets/images/train5.jpeg");
 
@@ -133,11 +133,14 @@ btnSignup.addEventListener('click', e => {
   var email = txtEmail.value;
   var pass = txtPass.value;
   var auth = firebase.auth();
+  $("#submitTrain").prop('disabled', false);
+  $(".btnEdit").prop('disabled', false);
   //sign in
   var promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.then(value => {$("#submitTrain").prop('disabled', false);});
   promise.then(value => {$(".btnEdit").prop('disabled', false);})
   promise.catch(e => console.log(e.message));
+  $("#modal").modal('hide');
 })
 
 //real time auth listener
@@ -149,7 +152,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     $(".btnEdit").prop('disabled', false);
   } else {
     console.log("not logged in");
-    $("#modal").modal('show');
     $(".btnEdit").prop('disabled', true);
   }
 })
